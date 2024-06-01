@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-A-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript">   
+        window.onload = function() {
+            console.log('Window loaded');
+
+            // Retrieve the username from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            console.log('Username:', username);
+
+            // Make an AJAX request to fetch user details
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `http://localhost/Final%20Project/first_lastName.php?username=${username}`, true);
+            xhr.onreadystatechange = function () {
+                console.log('Ready state:', xhr.readyState, 'Status:', xhr.status);
+
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const userDetails = JSON.parse(xhr.responseText);
+                    console.log('User details:', userDetails);
+
+                    // Display the user details in the buttons-container
+                    const buttonsContainer = document.querySelector('.buttons-container');
+                    if (buttonsContainer) {
+                        buttonsContainer.innerHTML = `Welcome, ${userDetails.first_name} ${userDetails.last_name}`;
+                    }
+
+                    const title = document.querySelector('.title');
+                    if (title) {
+                        title.innerHTML = `${userDetails.first_name} ${userDetails.last_name}`;
+                    }
+
+                    const officesLink = document.querySelector('#offices-link');
+                    if (officesLink) {
+                        officesLink.href = `offices.html?username=${username}`;
+                    }
+
+                    // Set the username value in the hidden input field
+                    const usernameInput = document.querySelector('input[name="username"]');
+                    if (usernameInput) {
+                        usernameInput.value = username;
+                    }
+
+                }
+            };
+
+            xhr.send();
+        };
+
+    </script>
+    <title class="title"></title>
+</head>
+<body>
+       <header>
+        <div class="nav container">
+            <ul class="navbar">
+                <li><a> Home </a></li>
+                <li><a id="offices-link" href="offices.html"> Offices </a></li>
+            </ul>
+
+            <div class="buttons-container">
+                
+            </div>
+        </div>
+       </header>
+       <section class="home" id="home">
+        <div class="home-text">
+            <h1>Car Rental</h1>
+        </div>
+
+        <form action="checkAvailableCars.php" method="post" style="position: absolute; top: 1px;">
+
+            <div class="dates-bar" style="width: 785px">
+
+                <label for="pickupDate">Pickup Date</label>
+                <input type="date" id="pickupDate" name="pickupDate" placeholder="pickupDate" required>
+        
+                <label for="dropoffDate">Dropoff Date</label>
+                <input type="date" id="dropoffDate" name="dropoffDate" placeholder="dropoffDate" required>
+            </div>
+
+            <div class="location-bar">
+            
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="city" required>
+
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" placeholder="country" required>
+            </div>
+
+            <div class="check-available-cars" style="position: absolute; top: 480px; left: 520px;">
+                <input type="hidden" name="username" value="">
+                <input type="submit" class="button" name="submit" value="Check Available Cars" style="color: white; background-color: black; padding: 10px 10px; width: 230px;">
+            </div>
+
+        </form>
+
+    </section>
+       
+</body>
+</html>

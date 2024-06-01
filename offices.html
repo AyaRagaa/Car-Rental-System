@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-A-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Offices</title>
+    <script type="text/javascript">   
+        window.onload = function() {
+            console.log('Window loaded');
+
+            // Retrieve the username from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            console.log('Username:', username);
+
+            const homeLink = document.querySelector('#home-link');
+            const officesLink = document.querySelector('#offices-link'); // Added link for offices
+            if (homeLink) {
+                homeLink.href = `yourhome.html?username=${username}`;
+            }
+            if (officesLink) {
+                officesLink.href = `offices.html?username=${username}`; // Adjust the link accordingly
+            }
+
+            // Fetch office data from the server
+            fetch('getOffices.php')
+                .then(response => response.json())
+                .then(data => displayOffices(data))
+                .catch(error => console.error('Error fetching offices:', error));
+        }
+
+        function displayOffices(offices) {
+            const officesContainer = document.querySelector('.offices-container');
+            if (officesContainer) {
+                console.log('Received data:', offices);
+                // Update the content with office information
+                const officeText = offices.map(office => `${office.city}, ${office.country}`).join('<br><br>');
+                officesContainer.innerHTML = officeText;
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav container">
+            <ul class="navbar">
+                <li><a id="home-link" href="yourhome.html"> Home </a></li>
+                <li><a id="offices-link" href="offices.html"> Offices </a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="home" id="home">
+        <div class="offices-container"></div>
+    </section>
+</body>
+</html>

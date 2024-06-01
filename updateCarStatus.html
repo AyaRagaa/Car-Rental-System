@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Update Car Status</title>
+    <link rel="stylesheet" href="UCS.css">
+    <script>
+        function validateForm() {
+            var plateNum = document.getElementById("plateNum").value;
+            var plateLetter = document.getElementById("plateLetter").value;
+            var radioButtons = document.getElementsByName("status");
+            var radioButtonChecked = false;
+
+            // Regular expressions for number and letter validation
+            var numRegex = /^[0-9]+$/;
+            var letterRegex = /^[a-zA-Z]+$/;
+
+            // Validation for Plate's Number field
+            if (plateNum === "" || !plateNum.match(numRegex)) {
+                alert("Please enter a valid Plate's Number (numbers only).");
+                return false;
+            }
+
+            // Validation for Plate's Letter field
+            if (plateLetter === "" || !plateLetter.match(letterRegex)) {
+                alert("Please enter a valid Plate's Letter (letters only).");
+                return false;
+            }
+
+            // Validation for radio buttons
+            for (var i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].checked) {
+                    radioButtonChecked = true;
+                    break;
+                }
+            }
+
+            if (!radioButtonChecked) {
+                alert("Please select the Car's Status.");
+                return false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box form-box">
+            <header>Update Car Status</header>
+            <form action="updateCarStatus.php" method="post" onsubmit="return validateForm()">
+                <div class="field input">
+                    <label for="plateNum"> Plate's Number </label>
+                    <input type="text" name="plateNum" id="plateNum" required>
+                </div>
+                <div class="field input">
+                    <label for="plateLetter"> Plate's Letter </label>
+                    <input type="text" name="plateLetter" id="plateLetter" required>
+                </div>
+                <div class="field radio">
+                    <label>Status of the Car:</label><br>
+                    <input type="radio" name="status" value="active" id="active">
+                    <label for="active">Active</label><br>
+                    <input type="radio" name="status" value="out_of_service" id="out_of_service">
+                    <label for="out_of_service">Out of Service</label><br>
+                    <input type="radio" name="status" value="rented" id="rented">
+                    <label for="rented">Rented</label><br>
+                </div>
+                <div class="field">
+                    <input type="submit" class="submit-button" value="Update">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

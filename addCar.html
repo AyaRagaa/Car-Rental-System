@@ -1,0 +1,86 @@
+<html>    
+<head>
+    <title>Add Car</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-A-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+    <script>
+        function validate()
+        {
+            var plateNum=document.getElementById("plateNum").value;
+            var plateLetter=document.getElementById("plateLetter").value;
+            var model=document.getElementById("model").value;
+            var year =  document.getElementById("year").value;
+            var status = document.getElementById("status").value;
+            var price=document.getElementById("price").value;
+            var office=document.getElementById("office").value;
+            var color=document.getElementById("color").value;
+
+        } </script>
+    <div class="container">
+        <div class="box form-box">
+            <header>Add Car</header>
+            <form action="addCar.php" method="post" onsubmit="Javascript: return validate()">
+
+                <div class="field input">
+                    <label for="plateNum"> Plate's Number </label>
+                    <input type="text" name="plateNum" id="plateNum" required>
+                </div>
+
+                <div class="field input">
+                    <label for="plateLetter"> Plate's Letter </label>
+                    <input type="text" name="plateLetter" id="plateLetter" required>
+                </div>
+
+                <div class="field input">
+                    <label for="model"> Model </label>
+                    <input type="text" name="model" id="model" required>
+                </div>
+
+                <div class="field input">
+                    <label for="year"> Year </label>
+                    <input type="text" name="year" id="year" required>
+                </div>
+
+                <div class="gender">
+                    <label for="status"> Status </label><br><br>
+                    <input name="status" type="radio" value="active"/> Active
+                    <input name="status" type="radio" value="out of service" /> Out of Service
+                    <input name="status" type="radio" value="rented"/> Rented<br>
+                </div>
+
+                <div class="field input">
+                    <label for="imagePath"> Image Path </label>
+                    <input type="text" name="imagePath" id="imagePath" required>
+                </div>
+
+                <div class="field input">
+                    <label for="price"> Price Per Day </label>
+                    <input type="text" name="price" id="price" required>
+                </div>
+
+                <div class="field input">
+                    <label for="color"> Color </label>
+                    <input type="text" name="color" id="color" required>
+                </div>
+
+                <div class="field input">
+                    <label for="office"> Car's Office Number </label>
+                    <input type="text" name="office" id="office" required>
+                </div>
+
+
+                <div class="field ">
+                    <input type="submit" class="loginButton" name="submit" value="Add Car"  >
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

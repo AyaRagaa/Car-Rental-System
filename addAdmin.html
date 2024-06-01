@@ -1,0 +1,114 @@
+<html>    
+<head>
+    <title>Add Admin</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-A-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <script type="text/javascript">   
+        function validate()
+        {
+            var email=document.getElementById("email").value;
+            var password=document.getElementById("password").value;
+            var newpass=document.getElementById("newPassword").value;
+            var mailformat =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            var phoneNumber =  document.getElementById("phoneNumber").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+
+            if(!(email.match(mailformat)))
+            {
+                alert("Invalid Email Address");
+                return false;
+            }   
+
+            if (password != newpass){ 
+                alert("Password Not Matching");
+                return false;
+            }
+
+            if (Number(phoneNumber) !== parseInt(phoneNumber, 10)){ 
+                alert("Invalid Phone Number");
+                return false;
+            }
+
+            if (!gender) {
+                alert("Please select your gender");
+                 return false;
+            }
+            
+            return true;
+        } 
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box form-box">
+            <header>Add Admin</header>
+            <form action="addAdmin.php" method="post" onsubmit="JavaScript:return validate()">
+
+                <div class="field input">
+                    <label for="username"> Username </label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+
+                <div class="field input">
+                    <label for="firstName"> First Name </label>
+                    <input type="text" name="firstName" id="firstName" required>
+                </div>
+
+                <div class="field input">
+                    <label for="lastName"> Last Name </label>
+                    <input type="text" name="lastName" id="lastName" required>
+                </div>
+
+                <div class="field input">
+                    <label for="email"> Email </label>
+                    <input type="text" name="email" id="email" required>
+                </div>
+
+                <div class="field input">
+                    <label for="password"> Password </label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+
+                <div class="field input">
+                    <label for="newPassword"> Re-Enter Password </label>
+                    <input type="password" name="newPassword" id="newPassword" required>
+                </div>
+
+                <div class="field input">
+                    <label for="phoneNumber"> Phone Number </label>
+                    <input type="phoneNumber" name="phoneNumber" id="phoneNumber" required>
+                </div>
+
+                <div class="field input">
+                    <label for="bdate">Birthday Date</label>
+                    <input type="date" name="bdate" id="bdate" placeholder="bdate" required>
+                </div>
+
+                <div class="gender">
+                    <label for="gender"> Gender </label><br>
+                    <input name="gender" type="radio" value="Female"/> Female
+                     <input name="gender" type="radio" value="Male" /> Male<br><br>
+                </div>
+
+                <div class="field ">
+                    <input type="submit" class="signupButton" name="submit" value="Add Admin"  >
+                </div>
+
+                <div class="links">
+                    Already an admin? <a href="adminHome.html">Login</a>
+                </div>
+
+                <div class="links">
+                    Go Back <a href="home.html">Home</a>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

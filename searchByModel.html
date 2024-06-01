@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservation</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-A-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reserveStyle.css">
+    <script type="text/javascript">
+        function getUsernameFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            return username;
+        }
+
+    </script>
+</head>
+<body>
+       <header>
+        <div class="nav container">
+            <ul class="navbar">
+                <li><a href="yourhome.html?username=" onclick="event.preventDefault(); location.href='yourhome.html?username=' + getUsernameFromURL();"> Home </a></li>
+                
+                <li><a href="reserve.html?username=" onclick="event.preventDefault(); location.href='reserve.html?username=' + getUsernameFromURL() + '&pickupDate=' + formattedPickupDate + '&dropoffDate=' + formattedDropoffDate + '&city=' + city + '&country=' + country;"> Available Cars </a></li>
+            </ul>
+        </div>
+        </header>
+       
+    <div id="available-cars-container" style="display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+    margin: 120px 20px 20px;">
+    </div>
+    <script>
+        // Get the parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        const pickupDate = new Date(urlParams.get('pickupDate'));
+        const dropoffDate = new Date(urlParams.get('dropoffDate'));
+        const city = urlParams.get('city');
+        const country = urlParams.get('country');
+        const model = urlParams.get('model');
+
+        // Format dates to YYYY-MM-DD
+        const formattedPickupDate = pickupDate.toISOString().split('T')[0];
+        const formattedDropoffDate = dropoffDate.toISOString().split('T')[0];
+
+        // Make an AJAX request to fetch available cars
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", `searchByModel.php?pickupDate=${formattedPickupDate}&dropoffDate=${formattedDropoffDate}&city=${city}&country=${country}&username=${username}&model=${model}`, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response and display available cars
+                const availableCarsContainer = document.getElementById('available-cars-container');
+                if (availableCarsContainer) {
+                    availableCarsContainer.innerHTML = xhr.responseText;
+                }
+            }
+        };
+        xhr.send();
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservation</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-A-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reserveStyle.css">
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var searchLink = document.getElementById('search-link');
+            var searchBox = document.getElementById('search-box');
+
+            searchLink.addEventListener('click', function () {
+                searchBox.style.display = (searchBox.style.display === 'block') ? 'none' : 'block';
+            });
+        });
+        function getUsernameFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            return username;
+        }
+
+        function searchCars() {
+            const searchOption = document.getElementById('search-options').value.toLowerCase();
+            const searchInput = document.getElementById('search-input').value;
+
+            console.log('Selected Option:', searchOption);
+            console.log('Search Input:', searchInput);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            const pickupDate = new Date(urlParams.get('pickupDate'));
+            const dropoffDate = new Date(urlParams.get('dropoffDate'));
+            const city = urlParams.get('city');
+            const country = urlParams.get('country');
+
+            // Format dates to YYYY-MM-DD
+            const formattedPickupDate = pickupDate.toISOString().split('T')[0];
+            const formattedDropoffDate = dropoffDate.toISOString().split('T')[0];
+
+            // Redirect to the appropriate search page based on the selected option
+            switch (searchOption) {
+                case 'color':
+                    window.location.href = `searchByColor.html?color=${searchInput}&pickupDate=${formattedPickupDate}&dropoffDate=${formattedDropoffDate}&city=${city}&country=${country}&username=${username}`;
+                    break;
+                case 'model':
+                    window.location.href = `searchByModel.html?model=${searchInput}&pickupDate=${formattedPickupDate}&dropoffDate=${formattedDropoffDate}&city=${city}&country=${country}&username=${username}`;
+                    break;
+                case 'year':
+                    window.location.href = `searchByYear.html?year=${searchInput}&pickupDate=${formattedPickupDate}&dropoffDate=${formattedDropoffDate}&city=${city}&country=${country}&username=${username}`;
+                    break;
+                default:
+                    alert('Please select a search option');
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <!-- <script src="main.js"></script> -->
+       <header>
+        <div class="nav container">
+            <ul class="navbar">
+                <li><a href="yourhome.html?username=" onclick="event.preventDefault(); location.href='yourhome.html?username=' + getUsernameFromURL();"> Home </a></li>
+                
+                <li><a href="#search" id="search-link"> Search </a></li>
+            </ul>
+
+            <div class="search-box" id="search-box">
+                <select id="search-options">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="color">Color</option>
+                    <option value="model">Model</option>
+                    <option value="year">Year</option>
+                </select>
+                <input type="search" name="" id="search-input" placeholder="Search Here">
+                <button class="confirm-button" onclick="searchCars()">Search</button>
+            </div>
+
+        </div>
+        </header>
+       
+    <div id="available-cars-container" style="display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+    margin: 120px 20px 20px;">
+    </div>
+    <script>
+        // Get the parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        const pickupDate = new Date(urlParams.get('pickupDate'));
+        const dropoffDate = new Date(urlParams.get('dropoffDate'));
+        const city = urlParams.get('city');
+        const country = urlParams.get('country');
+
+        // Format dates to YYYY-MM-DD
+        const formattedPickupDate = pickupDate.toISOString().split('T')[0];
+        const formattedDropoffDate = dropoffDate.toISOString().split('T')[0];
+
+        // Make an AJAX request to fetch available cars
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", `fetchAvailableCars.php?pickupDate=${formattedPickupDate}&dropoffDate=${formattedDropoffDate}&city=${city}&country=${country}&username=${username}`, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response and display available cars
+                const availableCarsContainer = document.getElementById('available-cars-container');
+                if (availableCarsContainer) {
+                    availableCarsContainer.innerHTML = xhr.responseText;
+                }
+            }
+        };
+        xhr.send();
+    </script>
+</body>
+</html>

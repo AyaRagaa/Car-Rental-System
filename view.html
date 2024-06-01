@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-A-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reserveStyle.css">
+    <title>Final Reservations</title>
+    <script type="text/javascript">   
+        function showDetails() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            // Make an AJAX request to fetch reservations within the specified date range
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `view.php?startDate=${startDate}&endDate=${endDate}`, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Handle the response and display reservation details
+                    const reservationContainer = document.getElementById('reservation-container');
+                    if (reservationContainer) {
+                        reservationContainer.innerHTML = xhr.responseText;
+                    }
+                }
+            };
+            xhr.send();
+
+            // Prevent the default form submission behavior
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <form id="reservationForm" onsubmit="return showDetails()">
+            <div class="bar">
+            <div class="dates-bar" style="top: 10px;">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" name="startDate" required>
+    
+                <label for="dropoffDate">End Date</label>
+                <input type="date" id="endDate" name="endDate" required>
+            </div>
+        
+            <div class="field" style="position: absolute; top: 40px; left: 750px;">
+                <input type="submit" class="loginButton" name="submit" value="Show Details">
+            </div>
+            </div>
+        </form>
+    </header>
+
+    <section id="reservation-container" style="display: flex; flex-wrap: wrap;
+    justify-content: space-around;"></section>
+
+    <!-- <script src="main.js"></script> -->
+</body>
+</html>

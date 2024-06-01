@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-padding-top: 1rem;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    color:white;
+    background-image: url('homeCar.png');
+    background-size: cover;
+}
+
+.dates-bar {
+    display: flex;
+    flex-direction: row; /* Change to row to make elements next to each other */
+    align-items: center; /* Align items to the center vertically */
+    justify-content: flex-start;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 10px;
+    margin-left: 10vw;
+    margin-top: 5vh;
+}
+
+.dates-bar label,
+.dates-bar input {
+    margin: 5px 10px; /* Add spacing between label and input */
+}
+
+.dates-bar input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 230px;
+    box-sizing: border-box;
+}
+
+.home {
+    background-size: cover;
+    max-width: 1300px;
+    margin: auto;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-repeat:no-repeat ;
+    background-position: center right;
+    padding-top: 0.5rem;
+}
+
+
+.reservations-container {
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: black;
+    margin-top: 20px; /* Adjust the spacing as needed */
+    transition: box-shadow 0.2s ease;
+}
+
+.reservation-list {
+    font-size: 1rem;
+    color: black;
+}
+
+.reservations-container:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+

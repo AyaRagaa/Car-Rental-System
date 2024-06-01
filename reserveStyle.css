@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&family=Poppins:wght@300;400;500;600;700&display=swap');
+body {
+    min-height: 100vh; /* Ensure a minimum height of the viewport */
+    overflow-y: auto; /* Allow vertical scrolling if the content overflows */
+    margin: 0; /* Remove default margin */
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #333; /* Add a background color for visibility */
+    color: white;
+    padding: 10px;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-padding-top: 1rem;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-color: black;
+    --text-color: white;
+    --bg-color: black;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+.container {
+    max-width: 800px; /* Adjust to your desired width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    display: block;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0px;
+}
+
+.navbar {
+    display: flex;
+    column-gap: 2rem;
+}
+
+.navbar a {
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    color: var(--text-color);
+    border-bottom: 3px solid var(--text-color);
+}
+
+.search-box {
+    position: relative;
+    margin-left: auto;
+    background-color: var(--text-color);
+    box-shadow: 4px 4px 20px rgb(15 54 55);
+    border: 1px solid var(--main-color);
+    border-radius: 0.5rem;
+    display: none; /* Hide initially */
+}
+
+.search-box select {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1rem;
+    margin-right: 5px; /* Add margin to separate select and input */
+}
+
+.search-box input {
+    flex: 1;
+    padding: 7px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1rem;
+}
+
+/* Add these styles to your CSS file or in a style tag in the head of your HTML */
+
+#available-cars-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px; /* Add margin for spacing */
+}
+
+.car {
+    max-width: 300px; /* Adjust the width of each car container */
+    margin: 10px; /* Add margin for separation */
+    padding: 10px;
+    background-color: white; /* Add background color for each car container */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: black;
+    text-align: center;
+}
+
+.car img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px; /* Add border-radius to round corners of images */
+}
+
+.car p {
+    margin-top: 10px; /* Add margin between image and description */
+}
+
+
+/* .car-container {
+    max-width: 500px; /* Adjust the width of the car container 
+    margin: 20px; /* Add margin for separation 
+    padding: 20px;
+    background-color: white; /* Add background color for each car container 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: black;
+}
+
+.car-container:hover{
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* White blurry shadow ;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+}
+
+.car-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Add a new class for flex container 
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow containers to wrap to the next line 
+    margin-top: 50px; /* Add space between rows 
+}
+
+
+.confirm-button{
+    height: 35px;
+    border: 0;
+    background-color: black;
+    border-radius: 5px;
+    border-color: black;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 0px 10px;
+}
+
+.confirm-button:hover {
+    opacity: 0.7;
+}
+
+.confirm-button:active {
+    opacity:0.5;
+} */

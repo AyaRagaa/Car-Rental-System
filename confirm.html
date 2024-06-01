@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Car Rental Reservation</title>
+    <link rel="stylesheet" href="style1.css">
+    <script type="text/javascript">
+        function validateForm() {
+            var fullName = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+            var phoneformat = /^[\d\- ]+$/;
+
+            if (fullName === '') {
+                alert("Empty Full Name Field!");
+                return false;
+            }
+
+            if (email == "") {
+                alert("Empty Email Field!");
+                return false;
+            }
+
+            if (!(email.match(mailformat))) {
+                alert("Invalid Email Address!");
+                return false;
+            }
+
+            if (phone === '') {
+                alert("Empty Phone Number Field!");
+                return false;
+            }
+
+            // Validate phone number (only digits and optional hyphens or spaces)
+            if (!phone.match(phoneformat)) {
+                alert('Please enter a valid phone number!');
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="form-box">
+                <header>Reservation Form</header>
+                <form action="reservation_process.php" method="post">
+                    <div class="field">
+                        <label for="name">Full Name:</label>
+                        <div class="input">
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email:</label>
+                        <div class="input">
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="phone">Phone Number:</label>
+                        <div class="input">
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    <!-- <div class="field">
+                        <label for="numPlate">Number Plate:</label>
+                        <div class="input">
+                            <input type="number" id="numPlate" name="numPlate" required>
+                        </div>
+                    </div> -->
+                    <!-- <div class="field">
+                        <label for="letterPlate">Letter Plate:</label>
+                        <div class="input">
+                            <input type="text" id="letterPlate" name="letterPlate" required>
+                        </div>
+                    </div> -->
+                    <div class="field">
+                        <label for="pickupDate">Pickup Date:</label>
+                        <div class="input">
+                            <input type="date" id="pickupDate" name="pickupDate">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="dropoffDate">Dropoff Date:</label>
+                        <div class="input">
+                            <input type="date" id="dropoffDate" name="dropoffDate">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="pickupLocation">Pickup Location:</label>
+                        <div class="input">
+                            <input type="text" id="pickupLocation" name="pickupLocation">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="dropoffLocation">Dropoff Location:</label>
+                        <div class="input">
+                            <input type="text" id="dropoffLocation" name="dropoffLocation">
+                        </div>
+                    </div>
+                    <input type="submit" class="loginButton" value="Confirm Reservation">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
